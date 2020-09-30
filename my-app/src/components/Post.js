@@ -4,6 +4,7 @@ import axios from "axios";
 import {UpdatePostForm} from "./UpdatePostForm";
 import {useDispatch} from "react-redux";
 import {loadPosts} from "../redux/action";
+import {API_URL} from "../config";
 
 export const Post = (post) => {
 
@@ -11,7 +12,7 @@ export const Post = (post) => {
 
     async function deletePost(){
         try {
-            const response = await axios.delete('http://127.0.0.1:8000/api/posts/' + post.post.id);
+            const response = await axios.delete(API_URL + post.post.id);
             console.log('👉 Returned data:', response);
             dispatch(loadPosts())
         } catch (e) {

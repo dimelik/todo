@@ -31,7 +31,7 @@ class PostController extends Controller
         $data = $request->input();
         $item = Post::create($data['post']);
         if ($item){
-            return response($data['post'], 200)
+            return response('success', 200)
                 ->header('Content-Type', 'text/plain');
         }
     }
@@ -61,7 +61,7 @@ class PostController extends Controller
             ->update(['category' => $data['category']]);
 
         if ($res){
-            return response('OK', 200)
+            return response('success', 200)
                 ->header('Content-Type', 'text/plain');
         }
 
@@ -77,7 +77,7 @@ class PostController extends Controller
     {
         $result = Post::destroy($id);
         if ($result){
-            return response($id, 200)
+            return response('success', 200)
                 ->header('Content-Type', 'text/plain');
         }
     }

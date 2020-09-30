@@ -1,11 +1,12 @@
 import {LOAD_POSTS} from './types';
+import {API_URL} from "../config";
 
 
 export function loadPosts() {
 
     return async dispatch => {
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/posts')
+            const response = await fetch(API_URL)
             const json = await response.json()
             dispatch({type: LOAD_POSTS, payload: json})
         } catch (e) {

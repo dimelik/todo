@@ -4,8 +4,11 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import {useDispatch} from "react-redux";
 import {loadPosts} from "../redux/action";
+import {API_URL} from "../config";
+
 
 export const CreatePostForm = () => {
+
     const dispatch = useDispatch()
 
     const [name, setName] = useState('')
@@ -15,7 +18,7 @@ export const CreatePostForm = () => {
     async function createPost(e) {
         e.preventDefault()
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/posts', {post: {name, description, category}});
+            const response = await axios.post(API_URL, {post: {name, description, category}});
             console.log('Returned data:', response);
             dispatch(loadPosts())
         } catch (e) {

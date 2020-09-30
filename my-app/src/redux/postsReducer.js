@@ -5,8 +5,6 @@ const initialState = {
     posts: []
 }
 
-
-
 export const postsReducer = (state = initialState, action) => {
     switch(action.type){
         case LOAD_POSTS:
@@ -14,6 +12,3 @@ export const postsReducer = (state = initialState, action) => {
         default: return state
     }
 }
-
-
-
