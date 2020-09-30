@@ -2,13 +2,18 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import {UpdatePostForm} from "./UpdatePostForm";
+import {useDispatch} from "react-redux";
+import {loadPosts} from "../redux/action";
 
 export const Post = (post) => {
 
-    async function deletePost(e){
+    const dispatch = useDispatch()
+
+    async function deletePost(){
         try {
             const response = await axios.delete('http://127.0.0.1:8000/api/posts/' + post.post.id);
             console.log('👉 Returned data:', response);
+            dispatch(loadPosts())
         } catch (e) {
             console.log(`Axios request failed: ${e}`);
         }

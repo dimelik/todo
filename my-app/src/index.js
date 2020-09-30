@@ -8,6 +8,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {rootReducer} from "./redux/rootReducer";
 
+
 const store = createStore(rootReducer, compose(
     applyMiddleware(
         thunk

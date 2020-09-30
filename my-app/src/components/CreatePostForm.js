@@ -2,8 +2,11 @@ import React, {useState} from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
+import {useDispatch} from "react-redux";
+import {loadPosts} from "../redux/action";
 
 export const CreatePostForm = () => {
+    const dispatch = useDispatch()
 
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
@@ -14,6 +17,7 @@ export const CreatePostForm = () => {
         try {
             const response = await axios.post('http://127.0.0.1:8000/api/posts', {post: {name, description, category}});
             console.log('Returned data:', response);
+            dispatch(loadPosts())
         } catch (e) {
             console.log(`Axios request failed: ${e}`);
         }
