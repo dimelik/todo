@@ -57,11 +57,14 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $affected = DB::table('posts')
-            ->where('id', $id)
-            ->update(['category' => $data['post']['category']]);
+        $res = Post::where('id', $id)->first()
+            ->update(['category' => $data['category']]);
 
-        if ($affected){
+//        $affected = DB::table('posts')
+//            ->where('id', $id)
+//            ->update(['category' => $data['category']]);
+
+        if ($res){
             return response('OK', 200)
                 ->header('Content-Type', 'text/plain');
         }
