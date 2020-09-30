@@ -1,6 +1,6 @@
 import React from 'react';
 import {ModalCreatePost} from "./components/ModalCreatePost";
-import {PostsTable} from "./components/PostsTable";
+import PostsTable from "./components/PostsTable";
 
 
 function App() {

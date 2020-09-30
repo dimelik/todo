@@ -1,10 +1,12 @@
-import React, {useEffect, useState} from "react";
-import axios from "axios";
+import React, {useEffect} from "react";
 import Table from "react-bootstrap/Table";
 import {Post} from "./Post";
+import {useDispatch, useSelector} from "react-redux";
+import {loadPosts} from "../redux/action";
 
-export const PostsTable = () => {
-    const [posts, setPosts] = useState([])
+export default () => {
+    const dispatch = useDispatch()
+    const posts = useSelector(state => state.posts.posts)
 
     let todo = posts.filter(function(posts) {
         return posts.category === 'TODO';
@@ -17,15 +19,8 @@ export const PostsTable = () => {
     });
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/posts')
-            .then(function (response) {
-                setPosts(response.data)
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
-    }, [])
+        dispatch(loadPosts())
+    },[dispatch])
 
     return(
         <Table striped bordered hover>
@@ -45,5 +40,4 @@ export const PostsTable = () => {
             </tbody>
         </Table>
     )
-
 }

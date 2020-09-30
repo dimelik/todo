@@ -60,10 +60,6 @@ class PostController extends Controller
         $res = Post::where('id', $id)->first()
             ->update(['category' => $data['category']]);
 
-//        $affected = DB::table('posts')
-//            ->where('id', $id)
-//            ->update(['category' => $data['category']]);
-
         if ($res){
             return response('OK', 200)
                 ->header('Content-Type', 'text/plain');
