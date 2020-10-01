@@ -1,12 +1,13 @@
 import React from 'react';
-import {ModalCreatePost} from "./components/ModalCreatePost";
+import {FormModal} from "./components/FormModal";
 import PostsTable from "./components/PostsTable";
+import {PostCreateForm} from "./components/PostCreateForm";
 
 
 function App() {
   return (
     <div className="container">
-      <ModalCreatePost />
+      <FormModal name='Create' component={<PostCreateForm />}/>
       <PostsTable />
     </div>
   );

@@ -12,11 +12,13 @@ class Post extends Model
 
     protected $fillable
         = [
-            'id',
             'name',
             'description',
             'category',
-            'created_at',
-            'updated_at',
         ];
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

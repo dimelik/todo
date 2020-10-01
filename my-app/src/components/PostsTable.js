@@ -1,10 +1,12 @@
 import React, {useEffect} from "react";
 import Table from "react-bootstrap/Table";
-import {Post} from "./Post";
 import {useDispatch, useSelector} from "react-redux";
+import {Post} from "./Post";
 import {loadPosts} from "../redux/action";
 
+
 export default () => {
+
     const dispatch = useDispatch()
     const posts = useSelector(state => state.posts.posts)
 

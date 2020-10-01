@@ -1,10 +1,12 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import {UpdatePostForm} from "./UpdatePostForm";
 import {useDispatch} from "react-redux";
 import {loadPosts} from "../redux/action";
+import {FormModal} from "./FormModal";
+import {PostUpdateForm} from "./PostUpdateForm";
 import {API_URL} from "../config";
+
 
 export const Post = (post) => {
 
@@ -25,9 +27,8 @@ export const Post = (post) => {
             <hr/>
             <h3>{post.post.name}</h3>
             <p>{post.post.description}</p>
-            <UpdatePostForm post={post.post} />
             <Button variant="outline-dark" onClick={deletePost}>Delete</Button>
-
+            <FormModal name='Update' component={<PostUpdateForm post={post.post} />}/>
         </>
     )
 }

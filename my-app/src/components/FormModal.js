@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import {CreatePostForm} from "./CreatePostForm";
 
 
-export const ModalCreatePost = () => {
+export const FormModal = (component) => {
     const [show, setShow] = useState(false);
+
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -13,14 +13,14 @@ export const ModalCreatePost = () => {
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
-                Create
+                {component.name}
             </Button>
 
             <Modal show={show} onHide={handleClose} animation={false}>
                 <Modal.Header closeButton>
                     <Modal.Title>Let's Go!!</Modal.Title>
                 </Modal.Header>
-                <Modal.Body><CreatePostForm/></Modal.Body>
+                <Modal.Body>{component.component}</Modal.Body>
             </Modal>
         </>
     );

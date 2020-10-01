@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 
 class PostController extends Controller
 {
@@ -16,7 +18,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all()->sortBy('created_at');
+        $posts = Post::with('comments')->get()->sortBy('created_at');
         return $posts->values()->toJson();
     }
 
@@ -29,22 +31,11 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data = $request->input();
-        $item = Post::create($data['post']);
-        if ($item){
+        $res = Post::create($data['post']);
+        if ($res){
             return response('success', 200)
                 ->header('Content-Type', 'text/plain');
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Post  $posts
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Post $posts)
-    {
-        //
     }
 
     /**
@@ -57,11 +48,17 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
+
         $res = Post::where('id', $id)->first()
             ->update(['category' => $data['category']]);
 
+        if(!empty($data['comment']['comment'])){
+            $res = DB::table('comments')->insert(
+                $data['comment']
+            );
+        }
         if ($res){
-            return response('success', 200)
+            return response('OK', 200)
                 ->header('Content-Type', 'text/plain');
         }
 
@@ -75,9 +72,11 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
+        $countComments = Comment::where('post_id', $id)->delete();
         $result = Post::destroy($id);
+
         if ($result){
-            return response('success', 200)
+            return response($countComments, 200)
                 ->header('Content-Type', 'text/plain');
         }
     }

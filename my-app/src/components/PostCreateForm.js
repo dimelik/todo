@@ -7,7 +7,7 @@ import {loadPosts} from "../redux/action";
 import {API_URL} from "../config";
 
 
-export const CreatePostForm = () => {
+export const PostCreateForm = () => {
 
     const dispatch = useDispatch()
 
